@@ -1,0 +1,15 @@
+Label
+Container
+Control
+MarginContainer
+SpinBox
+WorldEnvironment
+CSGSphere3D
+CollisionShape3D
+Label3D
+Label3D      - Matches the "text" keyword.
+Node3D
+SpotLight3D
+RayCast3D
+Marker3D
+SkeletonIK3D

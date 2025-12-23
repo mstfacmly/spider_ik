@@ -1,0 +1,27 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bdqaf500ow851"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrebf"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+stencil_reference = 2
+metadata/_stencil_owned = true
+
+[resource]
+next_pass = SubResource("StandardMaterial3D_qrebf")
+disable_ambient_light = true
+albedo_color = Color(0.6085782, 0.43981096, 0.415855, 1)
+roughness = 0.0
+rim = 0.16
+rim_tint = 0.47
+ao_enabled = true
+proximity_fade_distance = 0.01
+stencil_mode = 1
+stencil_flags = 2
+stencil_reference = 2

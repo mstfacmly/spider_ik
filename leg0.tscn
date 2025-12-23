@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://37jjd3mc71b0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pyidc"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvh5c"]
+size = Vector3(0.05, 0.5, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_28aoi"]
+size = Vector3(0.075, 0.5, 0.075)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jnlp7"]
+radius = 0.025
+height = 0.5
+radial_segments = 4
+rings = 1
+is_hemisphere = true
+
+[node name="leg0" type="MeshInstance3D"]
+transform = Transform3D(0.707107, -0.707107, 3.09086e-08, 0, -4.37114e-08, -1, 0.707107, 0.707107, -3.09086e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_pyidc")
+
+[node name="leg_in" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.303243, -1.49012e-08)
+mesh = SubResource("BoxMesh_vvh5c")
+skeleton = NodePath("../..")
+
+[node name="leg_center" type="MeshInstance3D" parent="leg_in"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_28aoi")
+
+[node name="leg_out" type="MeshInstance3D" parent="leg_in/leg_center"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -3.55271e-15, 1, 0, 0.25, 0)
+mesh = SubResource("SphereMesh_jnlp7")
+skeleton = NodePath("../../../..")

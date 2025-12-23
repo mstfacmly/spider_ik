@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://5ivrkhrnybxi"]
+
+[ext_resource type="Script" uid="uid://d0aw5r502veis" path="res://step_ray.gd" id="1_fpcd2"]
+
+[node name="step_ray" type="RayCast3D" node_paths=PackedStringArray("step_target")]
+hit_from_inside = true
+debug_shape_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("1_fpcd2")
+step_target = NodePath("step_target")
+
+[node name="step_target" type="Marker3D" parent="."]
+
+[node name="label" type="Label3D" parent="step_target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.41430664, 0)
+visible = false
+billboard = 1
+no_depth_test = true
