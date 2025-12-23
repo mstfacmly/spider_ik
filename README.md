@@ -8,10 +8,8 @@ Features:
     * The spider does its best to detect walls and cuvy surfaces, but still goes through them
 * Procedurally Adjustable number of legs
     * Leg number change currently only works well on the ground
-
-![spider_IK00](imports/spider_ik00.gif)
-
-![spider_IK01](imports/spider_ik01.gif)
-
 * Fixed camera with an autmatically adjusting FOV
 
+![spider_IK00](imports/spider_bot00.gif)
+
+![spider_IK01](imports/spider_bot01.gif)
