@@ -8,4 +8,4 @@ export.cfg
 export_credentials.cfg
 *.tmp
 
-export/
+exports/

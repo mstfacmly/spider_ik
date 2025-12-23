@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2gi5msid78na"
-path="res://.godot/imported/spider_leg.glb-be042ad523f7c5020890ecef36ec7ef1.scn"
+uid="uid://c32spwldywm81"
+path="res://.godot/imported/spider_leg1.glb-9039dbeccd9dbb2cfe4a557c2f033721.scn"
 
 [deps]
 
-source_file="res://spider_leg.glb"
-dest_files=["res://.godot/imported/spider_leg.glb-be042ad523f7c5020890ecef36ec7ef1.scn"]
+source_file="res://imports/spider_leg1.glb"
+dest_files=["res://.godot/imported/spider_leg1.glb-9039dbeccd9dbb2cfe4a557c2f033721.scn"]
 
 [params]
 

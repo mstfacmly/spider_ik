@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cnlfse6lt86dd"]
 
-[ext_resource type="Script" uid="uid://i41v1qxyai6k" path="res://spider.gd" id="1_qrebf"]
-[ext_resource type="Material" uid="uid://6totufcjcghf" path="res://teal.tres" id="2_1yt70"]
-[ext_resource type="Script" uid="uid://b7o7l534e4wo7" path="res://step_targets.gd" id="2_qrebf"]
+[ext_resource type="Script" uid="uid://i41v1qxyai6k" path="res://scripts/spider.gd" id="1_qrebf"]
+[ext_resource type="Material" uid="uid://6totufcjcghf" path="res://shaders/teal.tres" id="2_1yt70"]
+[ext_resource type="Script" uid="uid://b7o7l534e4wo7" path="res://scripts/step_targets.gd" id="2_qrebf"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_vvh5c"]
 material = ExtResource("2_1yt70")

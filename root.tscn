@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://7c4yqvx4iwdd"]
 
-[ext_resource type="Material" uid="uid://bdqaf500ow851" path="res://rose.tres" id="1_28aoi"]
-[ext_resource type="Script" uid="uid://b5k61kq0snww4" path="res://spin_box.gd" id="1_jnlp7"]
-[ext_resource type="Script" uid="uid://ba51paaxeoasy" path="res://camera_3d.gd" id="1_vvh5c"]
-[ext_resource type="PackedScene" uid="uid://cnlfse6lt86dd" path="res://spider.tscn" id="2_pyidc"]
+[ext_resource type="Material" uid="uid://bdqaf500ow851" path="res://shaders/rose.tres" id="1_28aoi"]
+[ext_resource type="Script" uid="uid://b5k61kq0snww4" path="res://scripts/spin_box.gd" id="1_jnlp7"]
+[ext_resource type="Script" uid="uid://ba51paaxeoasy" path="res://scripts/camera_3d.gd" id="1_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://cnlfse6lt86dd" path="res://assets/spider.tscn" id="2_pyidc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vho56"]
 flip_faces = true

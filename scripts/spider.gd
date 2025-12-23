@@ -61,8 +61,8 @@ func _generate_legs():
 	_set_base_rotation()
 	
 	for i in legs_count:
-		var leg = load('res://spider_leg.tscn').instantiate()
-		var steps = load('res://step_target.tscn').instantiate()
+		var leg = load('res://assets/spider_leg.tscn').instantiate()
+		var steps = load('res://assets/step_target.tscn').instantiate()
 	
 		leg.set_name('leg' + str(i))
 		steps.set_name('leg' + str(i))

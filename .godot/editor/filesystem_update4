@@ -2,4 +2,10 @@ res://root.tscn
 res://rose.tres
 res://teal.tres
 res://orange.tres
-res://camera_3d.gd
+res://step_target.tscn
+res://spider_leg.tscn
+res://spider.tscn
+res://shaders/rose.tres
+res://shaders/orange.tres
+res://assets/spider_leg.tscn
+res://scripts/spider.gd

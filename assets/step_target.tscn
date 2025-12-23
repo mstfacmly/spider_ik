@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5ivrkhrnybxi"]
 
-[ext_resource type="Script" uid="uid://d0aw5r502veis" path="res://step_ray.gd" id="1_fpcd2"]
+[ext_resource type="Script" uid="uid://d0aw5r502veis" path="res://scripts/step_ray.gd" id="1_fpcd2"]
 
 [node name="step_ray" type="RayCast3D" node_paths=PackedStringArray("step_target")]
 hit_from_inside = true

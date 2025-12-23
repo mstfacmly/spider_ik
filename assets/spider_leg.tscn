@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://dylfd0vue4aro"]
 
-[ext_resource type="PackedScene" uid="uid://b2gi5msid78na" path="res://spider_leg.glb" id="1_dlky4"]
-[ext_resource type="Script" uid="uid://b7yh8at8fe8tk" path="res://legs_ik.gd" id="2_pc1do"]
-[ext_resource type="Material" uid="uid://b4ux5wots5b53" path="res://orange.tres" id="2_s5xxj"]
-[ext_resource type="Script" uid="uid://dxbaerg8h334f" path="res://ik_target.gd" id="3_s5xxj"]
+[ext_resource type="PackedScene" uid="uid://b2gi5msid78na" path="res://imports/spider_leg.glb" id="1_gceab"]
+[ext_resource type="Material" uid="uid://b4ux5wots5b53" path="res://shaders/orange.tres" id="2_1cory"]
+[ext_resource type="Script" uid="uid://b7yh8at8fe8tk" path="res://scripts/legs_ik.gd" id="3_ol67p"]
+[ext_resource type="Script" uid="uid://dxbaerg8h334f" path="res://scripts/ik_target.gd" id="4_veifr"]
 
-[node name="spider_leg" instance=ExtResource("1_dlky4")]
+[node name="spider_leg" instance=ExtResource("1_gceab")]
 
 [node name="Cube" parent="Armature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource("2_s5xxj")
+surface_material_override/0 = ExtResource("2_1cory")
 
 [node name="SkeletonIK3D" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
 root_bone = &"leg_in"
@@ -16,11 +16,11 @@ tip_bone = &"tip"
 use_magnet = true
 magnet = Vector3(0, 20, 0)
 target_node = NodePath("../../../ik_target")
-script = ExtResource("2_pc1do")
+script = ExtResource("3_ol67p")
 
 [node name="ik_target" type="Marker3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04952784, 1)
-script = ExtResource("3_s5xxj")
+script = ExtResource("4_veifr")
 
 [node name="label" type="Label3D" parent="ik_target" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04952784, 0.00387609)
