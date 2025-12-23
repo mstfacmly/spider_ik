@@ -13,3 +13,5 @@ Features:
 ![spider_IK00](imports/spider_bot00.gif)
 
 ![spider_IK01](imports/spider_bot01.gif)
+
+![spider_IK02](imports/spider_bot02.gif)
