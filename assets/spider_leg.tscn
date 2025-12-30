@@ -19,7 +19,7 @@ target_node = NodePath("../../../ik_target")
 script = ExtResource("3_ol67p")
 
 [node name="ik_target" type="Marker3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04952784, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("4_veifr")
 
 [node name="label" type="Label3D" parent="ik_target" index="0"]

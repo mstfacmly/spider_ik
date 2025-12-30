@@ -6,7 +6,7 @@ signal move_legs
 
 @export var move_speed : float = 0.76
 @export var turn_speed : float = 1.5
-@export var ground_offset: float = 8.0
+@export var ground_offset: float = 0.005
 
 @export_range(2,9) var legs_count: int = 4:
 	set = set_legs_count
@@ -24,14 +24,11 @@ func _ready():
 	"""
 
 func _process(delta):
-	"""
-	transform.basis.slerp(
-		_basis_from_normal(_avg_normal_calc(_split_threes()).normalized()),
-		move_speed * delta).orthonormalized()
-	"""
 	transform.basis = lerp(transform.basis 
 						, _basis_from_normal(_avg_normal_calc(_split_threes()).normalized())
-						, move_speed * delta).orthonormalized()
+						, move_speed * delta
+						).orthonormalized()
+	
 	_movement(Input.get_axis('ui_down','ui_up'), Input.get_axis('ui_right','ui_left') ,delta)
 
 func _movement(dir, a_dir, delta):
@@ -41,7 +38,10 @@ func _movement(dir, a_dir, delta):
 #	if abs(dir) > 0 or abs(a_dir) > 0:
 	emit_signal('move_legs',1)
 	
-	position = lerp(position ,position + transform.basis.y * _target_pos(_avg_legs_calc($legs_root.get_children())),move_speed * delta)
+	position = lerp( position 
+			, position + transform.basis.y * _target_pos(_avg_legs_calc($legs_root.get_children()))
+			, move_speed * delta
+		)
 
 func set_legs_count(count):
 		legs_count = count
@@ -49,7 +49,7 @@ func set_legs_count(count):
 
 func _clear_legs():
 	set_process(0)
-
+	
 	for i in $step_targets.get_children():
 		$step_targets.remove_child(i)
 	for i in $legs_root.get_children():
@@ -79,7 +79,7 @@ func _generate_legs():
 	
 		$step_targets.get_child(i).global_position = $legs_root.get_child(i).get_node('ik_target').global_position
 		$step_targets.get_child(i).global_rotation.y = $legs_root.get_child(i).global_rotation.y
-		$step_targets.get_child(i).global_position.y -= $step_targets.get_child(i).target_position.y * 0.6 #-ground_offset / 8
+		$step_targets.get_child(i).global_position.y -= $step_targets.get_child(i).target_position.y * 0.6
 	
 	_set_adjacent_opposing_legs()
 
@@ -120,11 +120,12 @@ func _avg_normal_calc(normal_in:Array):
 func _avg_legs_calc(legs_in:Array):
 	var avg = Vector3()
 	for i in legs_in:
-		avg += i.position
+		avg += i.get_node('ik_target').position
 	
 	return avg / legs_in.size()
 
 func _target_pos(legs_pos_avg : Vector3):
+#	print(legs_pos_avg)
 	return legs_pos_avg * transform.basis.y * ground_offset
 
 func _distance(target_position: Vector3):

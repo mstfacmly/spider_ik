@@ -15,7 +15,7 @@ func _ready():
 func _process(_delta):
 	if !stepping && !adjacent_target.stepping && abs(global_position.distance_to(step_target.global_position)) > step_distance:
 			step()
-#	$label.set_text('iktarget '+str(step_target.global_position.y))
+	$label.set_text('iktarget '+str(step_target.global_position.y))
 
 func step():
 	var half_way = (global_position + step_target.global_position) / 2
@@ -28,4 +28,3 @@ func step():
 	t.tween_callback(func(): stepping = false)
 	t.tween_callback(func(): resting = true)
 	t.tween_callback(func(): set_process(false))
-	
