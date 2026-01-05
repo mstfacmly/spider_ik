@@ -12,4 +12,4 @@ func _process(delta):
 	var distance_mod = global_position.distance_squared_to(get_node(look_target).global_position)
 	fov = lerp(clamp(fov,min_fov,max_fov), -distance_mod + 100, delta)
 	
-	get_node(label_path).text = str(fov)
+	get_node(label_path).text += '\n fov : ' + str(fov)

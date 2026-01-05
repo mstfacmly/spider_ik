@@ -6,42 +6,33 @@ signal move_legs
 
 @export var move_speed : float = 0.76
 @export var turn_speed : float = 1.5
-@export var ground_offset: float = 0.005
+@export var ground_offset: float = 1
 
 @export_range(2,9) var legs_count: int = 4:
 	set = set_legs_count
+
+@export_node_path('Label') var label_path
 
 func _ready():
 	set_process(0)
 	connect("remove_legs",_clear_legs)
 	connect("add_legs",_generate_legs)
 	emit_signal('add_legs')
-	
-	"""
-	for i in range(1,31):
-		if i % 2 != 0:
-			print(i)
-	"""
 
 func _process(delta):
-	transform.basis = lerp(transform.basis 
-						, _basis_from_normal(_avg_normal_calc(_split_threes()).normalized())
-						, move_speed * delta
-						).orthonormalized()
+	transform.basis = lerp( transform.basis , _basis_from_normal(_legs_normal_avg()) , move_speed * delta ).orthonormalized()
+	position = lerp( position , position + transform.basis.y * _distance(_target_pos(_legs_pos_avg())) , move_speed * delta )
+	_movement(Input.get_axis('ui_down','ui_up'), Input.get_axis('ui_right','ui_left') , delta)
 	
-	_movement(Input.get_axis('ui_down','ui_up'), Input.get_axis('ui_right','ui_left') ,delta)
+#	_label_text( 'position.y' ,str(position.y))
+	_label_text( 'target_position' , str(_distance(_target_pos(_legs_pos_avg()))))
 
 func _movement(dir, a_dir, delta):
-	translate(Vector3(0,0,-dir) * move_speed * delta)
-	rotate_object_local(Vector3.UP, a_dir * turn_speed * delta)
+	translate( Vector3(0,0,-dir) * move_speed * delta )
+	rotate_object_local( Vector3.UP, a_dir * turn_speed * delta )
 	
 #	if abs(dir) > 0 or abs(a_dir) > 0:
 	emit_signal('move_legs',1)
-	
-	position = lerp( position 
-			, position + transform.basis.y * _target_pos(_avg_legs_calc($legs_root.get_children()))
-			, move_speed * delta
-		)
 
 func set_legs_count(count):
 		legs_count = count
@@ -74,8 +65,9 @@ func _generate_legs():
 		$legs_root.get_child(i).rotate_y(absf(fmod(deg_to_rad(i*(360/legs_count)),360)))
 		$legs_root.get_child(i).get_node('ik_target').step_target = $step_targets.get_child(i).get_node('step_target')
 	
-		connect('move_legs',leg.get_node('ik_target').set_process)
-		leg.get_node('ik_target').set_as_top_level(1)
+		connect('move_legs',$legs_root.get_child(i).get_node('ik_target').set_process)
+		$legs_root.get_child(i).get_node('Armature/Skeleton3D/SkeletonIK3D').start()
+		$legs_root.get_child(i).get_node('ik_target').set_as_top_level(1)
 	
 		$step_targets.get_child(i).global_position = $legs_root.get_child(i).get_node('ik_target').global_position
 		$step_targets.get_child(i).global_rotation.y = $legs_root.get_child(i).global_rotation.y
@@ -110,22 +102,21 @@ func _basis_from_normal(normal: Vector3) -> Basis:
 	
 	return result
 
-func _avg_normal_calc(normal_in:Array):
+func _legs_normal_avg():
 	var avg = Vector3()
-	for i in normal_in:
+	for i in _split_threes():
 		avg += -i.normal
 	
-	return avg / normal_in.size()
+	return (avg / _split_threes().size()).normalized()
 
-func _avg_legs_calc(legs_in:Array):
+func _legs_pos_avg():
 	var avg = Vector3()
-	for i in legs_in:
+	for i in $legs_root.get_children():
 		avg += i.get_node('ik_target').position
 	
-	return avg / legs_in.size()
+	return avg / $legs_root.get_children().size()
 
 func _target_pos(legs_pos_avg : Vector3):
-#	print(legs_pos_avg)
 	return legs_pos_avg * transform.basis.y * ground_offset
 
 func _distance(target_position: Vector3):
@@ -165,14 +156,5 @@ func _turn_light():
 	var rotation_clamp = clampf($light.rotation_degrees.y,-30,30)
 	$light.rotate_y(Input.get_axis('ui_right','ui_left') * rotation_clamp)
 
-func _labels(i):
-	$Label3D.text = str($legs_root.rotation_degrees.y)+'\n'+str($step_targets.rotation_degrees.y)
-	$legs_root.get_child(i).get_node('leg_number').text = str($legs_root.get_child(i).get_node('ik_target').step_target)+'\n'+str($legs_root.get_child(i).rotation_degrees.y)
-	$step_targets.get_child(i).get_node('label').text = str($step_targets.get_child(i).name)+'\n'+str($step_targets.get_child(i).rotation_degrees.y)
-	
-	"""
-	('ik_leg',str(i),'	,	',get_node('legs_root/leg'+str(i)+'/ik_target')
-	+'\nadjacent	,	' + get_node('legs_root/leg'+str(i)+'/ik_target').adjacent_target
-	+'\nopposite	,	' + get_node('legs_root/leg'+str(i)+'/ik_target').opposite_target
-	)
-	"""
+func _label_text(label : String , text : String):
+	get_node(label_path).text = '\n' + label + ' : ' + text

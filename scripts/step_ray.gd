@@ -3,7 +3,7 @@ extends RayCast3D
 @export var step_target : Node3D
 
 func _ready():
-	target_position = Vector3(0,-4.0,0.15)
+	target_position = Vector3(0,-2.0,0.35)
 
 func _physics_process(_delta):
 	var hit_location = get_collision_point()

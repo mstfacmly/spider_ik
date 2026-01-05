@@ -1,3 +1,4 @@
+CSGBox3D
 Label
 Container
 Control
@@ -12,4 +13,3 @@ Node3D
 SpotLight3D
 RayCast3D
 Marker3D
-SkeletonIK3D
